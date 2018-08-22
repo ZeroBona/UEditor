@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ueditor demo</title>
+  <style>
+    body {
+      color: #68728c !important;
+      background-color: #e0e0e0 !important;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+<script src="./third-party/jquery-1.10.2.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<!-- 加载编辑器的容器 -->
+<div style="width: 100%;">
+  <script id="container" name="content" type="text/plain">请输入内容</script>
+</div>
+<!-- 配置文件 -->
+<script type="text/javascript" src="ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="editor_api.js"></script>
+<!-- 实例化编辑器 -->
+<script>
+    var ue = UE.getEditor('container', {
+        //设置配置项，参考文档 http://fex.baidu.com/ueditor/#start-config
+        toolbars: [["source", "removeformat", "undo", "redo", "|", "fontsize", "|", "bold", "italic", "underline", "|", "forecolor", "backcolor", "blockquote", "horizontal", "|", "link",  "|", "justifyleft", "justifycenter", "justifyright", "|", "rowspacingtop", "rowspacingbottom", "lineheight", "insertorderedlist", "insertunorderedlist", "|", "imagenone", "imageleft", "imageright", "imagecenter"]],
+        wordCount: false,
+        elementPathEnabled: false,
+        initialFrameHeight: 800,
+        autoHeightEnabled: false,
+        allowDivTransToP: false,
+        autoClearinitialContent: true,
+        topOffset: 80,
+        saveInterval: 60000,
+        disabledTableInTable: false,/*
+    initialFrameWidth: 660,*/
+        customDomain: true,
+        autoFloatEnabled: true,
+        fontsize: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 36],
+        enableAutoSave: false
+    });
+
+    ue.ready(function () {
+        //让编辑器获得焦点
+        //ue.focus();
+
+        //设置编辑器的内容，可用于设置默认内容，或者用于插入模板
+        //ue.setContent('<p>hello</p>');
+
+        //追加编辑器内容
+        //ue.setContent('', true);
+
+        //判断编辑器里面是否有内容，布尔类型，保存的时候判断
+        //ue.hasContents();
+
+        //获取html内容，保存文档/模板
+        //var html = ue.getContent();
+
+        //插入给定内容
+        //ue.execCommand('insertHtml', value);
+
+        //自定义请求参数，传入参数表,添加到已有参数表里
+        /*ue.execCommand('serverparam', {
+            token: 'bona'
+        });*/
+
+        /*$('[title]').tooltip();*/
+        $('[data-toggle="tooltip"]').tooltip();
+
+        /*$.ajax({
+            url: './template/TemplatePartial_200.json',
+            type: 'get',
+            success: function (data) {
+                ue.setContent(data.Data);
+            }
+        });*/
+
+        //清空内容
+        $('.clear').on('click',function () {
+            ue.execCommand('cleardoc');
+        });
+
+        //插入内容
+        $('.insert').on('click',function () {
+            ue.execCommand('insertHtml', '<div>中国有嘻哈</div>');
+        });
+
+        //手机预览
+        $('.preview').on('click',function () {
+            alert('待开发');
+        });
+
+        let promise = new Promise(function (resolve,reject) {
+
+        });
+        console.log(promise);
+
+
+    });
+</script>
+</body>
+
+</html>
